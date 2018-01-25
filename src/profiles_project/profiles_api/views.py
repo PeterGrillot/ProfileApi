@@ -52,6 +52,9 @@ class HelloApiView(APIView):
 
 class HelloViewSet(viewsets.ViewSet):
 	""" Test API viewset"""
+
+	serializer_class = serializers.HelloSerializer
+
 	def list(self, request):
 		"""Return Hello"""
 		a_viewset = [
@@ -59,3 +62,32 @@ class HelloViewSet(viewsets.ViewSet):
 			'Less Code'
 		]
 		return Response({'mesage': 'Hello!', 'a_viewset': a_viewset})
+
+
+	def create (self,request):
+		"""create """
+		serializer = serializers.HelloSerializer(data=request.data)
+		if serializer.is_valid():
+			name = serializer.data.get('name')
+			message = 'Hello {0}'.format(name)
+			return Response({'message': message})
+		else:
+			return Response(
+					serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+	def retrieve(self,request, pk=None):
+		"""Handle retieve by ID"""
+		return Response({'http_method': 'GET'})
+
+	def update(self,request, pk=None):
+		"""update """
+		return Response({'http_method': 'PUT'})
+
+	def partial_update(self,request, pk=None):
+		"""partial_update"""
+		return Response({'http_method': 'PATCH'})
+
+	def destroy(self,request, pk=None):
+		"""partial_update"""
+		return Response({'http_method': 'DELETE'})
+	
