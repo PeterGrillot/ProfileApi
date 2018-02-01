@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 class Feed extends Component {
 
-	constructor () {
-		super();
+	constructor (props) {
+		super(props);
     this.state = {
       feed : [
       	'id': 0,
@@ -23,10 +23,11 @@ class Feed extends Component {
 				method: 'GET', // or 'PUT'
 				headers: headers
 			}).then(res => res.json())
-			.catch(error => console.error('Error:', error))
+			.catch(error => false)
 			.then(response => {
-				this.setState({feed:response})
-				console.log(this.state.feed)
+				if (response){
+					this.setState({feed:response})
+				}
 			});
 	}
 	render() {
@@ -34,13 +35,12 @@ class Feed extends Component {
 			<div className = "Feed">
 				<h2> Feed </h2>
 				{
-					this.state.feed.map((item,index)=> {
-						return (
-							<li key={index}>
-								<a href={`/profile/${item.user_profile}`}>{item.status_text}</a>
-								<br/>{item.created_on}
-							</li>
-					)})
+					this.state.feed.map((item,index)=> {	
+						<li key={index}>
+							<a href={`/profile/${item.user_profile}`}>{item.status_text}</a>
+							<br/>{item.created_on}
+						</li>
+					})	
 				}
 			</div>
 		);
