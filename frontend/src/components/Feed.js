@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
 // Needed to get Store!
-// import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-// import * as Actions from "../store/actions";
 
 class Feed extends Component {
 	constructor(props) {
@@ -14,13 +12,12 @@ class Feed extends Component {
 	}
 	loadData() {
 		const { token } = this.props;
-		const __token = token;
 		const headers = {
-			'Authorization': `Token ${__token}`,
+			'Authorization': `Token ${token}`,
 			'Content-Type': 'application/json'
 		}
 		fetch('http://localhost:8080/api/feed/', {
-				method: 'GET', // or 'PUT'
+				method: 'GET',
 				headers: headers
 			}).then(res => res.json())
 			.catch((error) => {
@@ -56,7 +53,6 @@ class Feed extends Component {
 							</div>
 							<hr/>
 					</article>
-
 				);
 			});
 		} else {
