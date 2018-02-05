@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 // Needed to get Store!
-import { bindActionCreators } from "redux";
+// import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import * as Actions from "../store/actions";
+// import * as Actions from "../store/actions";
 
 class Feed extends Component {
 	constructor(props) {
@@ -13,7 +13,8 @@ class Feed extends Component {
 		};
 	}
 	loadData() {
-		const __token = '0df11152c1122fbc81467dc9402b8bf8af4a2fac';
+		const { token } = this.props;
+		const __token = token;
 		const headers = {
 			'Authorization': `Token ${__token}`,
 			'Content-Type': 'application/json'
@@ -22,12 +23,10 @@ class Feed extends Component {
 				method: 'GET', // or 'PUT'
 				headers: headers
 			}).then(res => res.json())
-			.catch(error => false)
+			.catch((error) => {
+				console.log(error)
+			})
 			.then(response => {
-				// if (response){
-				// 	this.setState({feed:response});
-				// 	console.log('response')
-				// }
 				this.setState(() => {
 					return {
 						feed: response
@@ -39,21 +38,39 @@ class Feed extends Component {
 		this.loadData();
 	}
 	render() {
-		const { token, dispatch } = this.props;
 		let list;
 		if (this.state.feed.length > 0) {
 			list = this.state.feed.map((item,index) => {
 				return (
-					<li key={index}>
-						<p>{token}</p>
-						<a href={`/profile/${item.user_profile}`}>{item.status_text}</a>
-						<br/>{item.created_on}
-					</li>
+					<article key={index} class="uk-comment">
+							<header class="uk-comment-header uk-grid-medium uk-flex-middle">
+									<div class="uk-width-expand">
+											<h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">{item.user_profile}</a></h4>
+											<ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+													<li><a href="#">{item.created_on}</a></li>
+											</ul>
+									</div>
+							</header>
+							<div class="uk-comment-body">
+									<p>{item.status_text}</p>
+							</div>
+							<hr/>
+					</article>
+
 				);
 			});
+		} else {
+			return (
+			<div class="uk-alert-primary uk-alert">
+				<p>Please Login to View Content.</p>
+			</div>
+			)
 		}
 		return ( 
-			<ul className="Feed">{list}</ul>
+			<div className="Feed">
+				<h2>Feed</h2>
+				{list}
+			</div>
 		);
 	}
 }

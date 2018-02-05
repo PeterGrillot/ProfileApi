@@ -1,19 +1,8 @@
-export const INCREMENT_COUNTER = "INCREMENT_COUNTER";
-export const DECREMENT_COUNTER = "DECREMENT_COUNTER";
-export const AUTH_TOKEN = "AUTH_TOKEN";
+export const ADD_TOKEN = "ADD_TOKEN";
 
-export function increment() {
+export const addToken = (token) => {
   return {
-    type: INCREMENT_COUNTER
-  };
-}
-
-export function decrement() {
-  return {
-    type: DECREMENT_COUNTER
-  };
-}export function getToken() {
-  return {
-    type: AUTH_TOKEN
+    type: ADD_TOKEN,
+    token
   };
 }

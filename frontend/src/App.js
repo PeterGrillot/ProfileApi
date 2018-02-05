@@ -1,35 +1,41 @@
+// React
 import React, { Component } from 'react';
 import {
 	BrowserRouter as Router,
 	Route,
 	Link
 } from 'react-router-dom'
+
+// UI
+import UIkit from '../node_modules/uikit/dist/css/uikit.min.css';
+
+// Redux
 import { Provider } from 'react-redux';
 import { createStore } from "redux";
 import reducer from "./store/reducers";
 
-
-
-import './App.css';
-
+// Components
 import About from './components/About.js';
 import Feed from './components/Feed.js';
 import Login from './components/Login.js';
 
+// Create Store
 const store = createStore(reducer, { 
 	count: 0, 
 	token: undefined
 });
-console.log(store.getState())
+
+// App Component
 class App extends Component {
 	render() {
 		return (
 			<Provider store={store}>
-				<Router className="App">
-					<div>
+				<Router>
+					<div className="uk-container">
 						<header className="App-header">
-							<h1 className="App-title">Welcome to SpaceBook</h1>
+							<h1 className="uk-heading-primary">Welcome to SpaceBook</h1>
 						</header>
+						<hr/>
 						<nav>
 							<Link to="/about">About</Link>
 							<Link to="/feed">Feed</Link>

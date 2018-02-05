@@ -25,7 +25,7 @@ SECRET_KEY = 'et-_xvup_d@&hp5+ra=c7v7l%4o&%55to1hlk#a97w-n%pz$5a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','ec2-18-216-180-134.us-east-2.compute.amazonaws.com']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','0.0.0.0','ec2-18-216-180-134.us-east-2.compute.amazonaws.com']
 
 
 # Application definition
@@ -127,6 +127,8 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'profiles_api.UserProfile'
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
-    'localhost:3000',
+    'http://localhost:3000',
 )
