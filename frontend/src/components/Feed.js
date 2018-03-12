@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import Cookies from 'js-cookie';
 
 // Needed to get Store!
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
 class Feed extends Component {
 	constructor(props) {
@@ -11,7 +12,8 @@ class Feed extends Component {
 		};
 	}
 	loadData() {
-		const { token } = this.props;
+		const token = Cookies.get('token');
+		console.log(token)
 		const headers = {
 			'Authorization': `Token ${token}`,
 			'Content-Type': 'application/json'
@@ -39,25 +41,25 @@ class Feed extends Component {
 		if (this.state.feed.length > 0) {
 			list = this.state.feed.map((item,index) => {
 				return (
-					<article key={index} class="uk-comment">
-							<header class="uk-comment-header uk-grid-medium uk-flex-middle">
-									<div class="uk-width-expand">
-											<h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">{item.user_profile}</a></h4>
-											<ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-													<li><a href="#">{item.created_on}</a></li>
+					<article key={index}>
+							<header>
+									<div>
+											<h4><a className="uk-link-reset" href="#">{item.user_profile}</a></h4>
+											<ul>
+													<li>{item.created_on}</li>
 											</ul>
 									</div>
 							</header>
-							<div class="uk-comment-body">
+							<section>
 									<p>{item.status_text}</p>
-							</div>
+							</section>
 							<hr/>
 					</article>
 				);
 			});
 		} else {
 			return (
-			<div class="uk-alert-primary uk-alert">
+			<div>
 				<p>Please Login to View Content.</p>
 			</div>
 			)

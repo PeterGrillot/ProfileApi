@@ -36,8 +36,9 @@ class Login extends Component {
       .catch(error => false)
       .then(response => {
         if(!!response.token){
-          let action = Actions.addToken(response.token);
-          dispatch(action);
+          // let action = Actions.addToken(response.token);
+          // dispatch(action);
+          document.cookie = `token=${response.token}`;
           history.push('/feed');
         }
       });

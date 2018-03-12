@@ -10,11 +10,3 @@ it('renders without crashing', () => {
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
-
-it('loads UIkit', () => {
-	// loads the Icon plugin
-	UIkit.use(Icons);
-
-	// components can be called from the imported UIkit reference
-	UIkit.notification('Hello world.');
-});

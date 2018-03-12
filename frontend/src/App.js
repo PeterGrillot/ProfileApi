@@ -6,9 +6,6 @@ import {
 	Link
 } from 'react-router-dom'
 
-// UI
-import UIkit from '../node_modules/uikit/dist/css/uikit.min.css';
-
 // Redux
 import { Provider } from 'react-redux';
 import { createStore } from "redux";
@@ -31,9 +28,9 @@ class App extends Component {
 		return (
 			<Provider store={store}>
 				<Router>
-					<div className="uk-container">
+					<div>
 						<header className="App-header">
-							<h1 className="uk-heading-primary">Welcome to SpaceBook</h1>
+							<h1>Welcome to SpaceBook</h1>
 						</header>
 						<hr/>
 						<nav>
